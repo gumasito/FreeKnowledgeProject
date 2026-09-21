@@ -1,0 +1,626 @@
+/* ============================================================
+   TOKENS
+   Concepto: la página se recorre como un libro.
+   - Portada (header + inicio): tono oscuro, tapa de libro.
+   - Páginas interiores (galería + promociones): tono papel.
+   - Contraportada (pie): vuelve al tono oscuro.
+   Los auspicios se representan como "sellos" postales,
+   ya que una empresa que auspicia "sella" su apoyo al libro.
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap&Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap');
+:root {
+    --color-fondo: #14231c;
+    --color-fondo-suave: #1c2f25;
+    --color-papel: #ede3cf;
+    --color-papel-clara: #f7f1e3;
+    --color-tinta: #1b1b16;
+    --color-tinta-suave: rgba(27, 27, 22, 0.62);
+    --color-sello: #a63d40;
+    --color-oro: #c9a227;
+    --color-linea: rgba(20, 35, 28, 0.16);
+    --color-linea-clara: rgba(247, 241, 227, 0.2);
+
+    --fuente-display: "Fraunces", Georgia, serif;
+    --fuente-texto: "Work Sans", "Segoe UI", sans-serif;
+
+    --radio-s: 4px;
+    --radio-m: 10px;
+    --max-ancho: 1180px;
+
+    --espacio-seccion: clamp(64px, 9vw, 128px);
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--color-papel-clara);
+    color: var(--color-tinta);
+    font-family: var(--fuente-texto);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+h1,
+h2,
+p {
+    margin: 0;
+}
+
+.contenedor {
+    width: 100%;
+    max-width: var(--max-ancho);
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+:focus-visible {
+    outline: 2px solid var(--color-oro);
+    outline-offset: 3px;
+}
+
+/* ============================================================
+   PLACEHOLDERS — clases "caja--nombreetiqueta"
+   Bloque genérico para todo espacio pendiente de contenido.
+   Cada caja hereda esta base y puede matizarse por contexto.
+   ============================================================ */
+
+[class^="caja--"],
+[class*=" caja--"] {
+    font-family: var(--fuente-texto);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--color-tinta-suave);
+    border: 1px dashed var(--color-linea);
+    border-radius: var(--radio-s);
+    padding: 10px 14px;
+    background: rgba(20, 35, 28, 0.03);
+}
+
+/* variante para cajas sobre fondo oscuro (portada / contraportada) */
+.cabecera [class^="caja--"],
+.seccion-hero [class^="caja--"],
+.pie [class^="caja--"] {
+    color: rgba(247, 241, 227, 0.65);
+    border-color: var(--color-linea-clara);
+    background: rgba(247, 241, 227, 0.04);
+}
+
+/* ============================================================
+   CABECERA (portada)
+   ============================================================ */
+
+.cabecera {
+    background: var(--color-fondo);
+}
+
+.cabecera__interior {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.cabecera .caja--logo {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+}
+
+.nav {
+    display: flex;
+    gap: 8px;
+}
+
+.caja--nav-item {
+    border: none;
+    font-family: var(--fuente-display);
+    background: none;
+    padding: 6px 10px;
+    font-style: normal;
+    font-size: 1.06em;
+    transition:color,background-color,padding, .3s ease;
+}
+
+.caja--nav-item:hover {
+    color: var(--color-papel-clara);
+    background-color: var(--color-fondo-suave);
+    padding:8px 12px;
+}
+
+.caja--nav-cta {
+    border-style: solid;
+    border-color: var(--color-oro);
+    color: var(--color-oro);
+    font-style: normal;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background, color, .3s ease;
+}
+
+.caja--nav-cta:hover {
+    background: var(--color-oro);
+    color: var(--color-fondo);
+}
+
+/* ============================================================
+   INICIO / PRESENTACIÓN (portada)
+   ============================================================ */
+
+.seccion-hero {
+    background: var(--color-fondo);
+    padding-top: clamp(48px, 7vw, 96px);
+    padding-bottom: clamp(48px, 7vw, 96px);
+}
+
+.hero__grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: clamp(32px, 6vw, 72px);
+    align-items: center;
+}
+
+.hero__texto {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.caja--kicker {
+    align-self: flex-start;
+    font-size: 0.72rem;
+    padding: 6px 10px;
+}
+
+.caja--titulo {
+    font-family: var(--fuente-display);
+    font-weight: 500;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 1.05;
+    padding: 20px 22px;
+}
+
+.caja--presentacion {
+    max-width: 46ch;
+    font-size: 1rem;
+    line-height: 1.7;
+    padding: 16px 18px;
+}
+
+.hero__acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 8px;
+}
+
+.caja--boton-primario,
+.caja--boton-secundario {
+    font-style: normal;
+    font-weight: 500;
+    padding: 12px 22px;
+    border-radius: 999px;
+}
+
+.caja--boton-primario {
+    background: var(--color-sello);
+    border-color: var(--color-sello);
+    color: var(--color-papel-clara);
+}
+
+.caja--boton-primario:hover {
+    background: transparent;
+    color: var(--color-sello);
+}
+
+.caja--boton-secundario:hover {
+    color: var(--color-papel-clara);
+    border-color: var(--color-papel-clara);
+}
+
+.hero__visual {
+    position: relative;
+    justify-self: center;
+    width: 100%;
+    max-width: 360px;
+}
+
+.caja--hero-imagen {
+    aspect-ratio: 3 / 4;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transform: rotate(-2deg);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+    background: rgba(247, 241, 227, 0.05);
+}
+
+/* Sello de auspicio: emula una estampilla postal con borde perforado */
+.sello {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: var(--color-papel-clara);
+    border: 3px dashed rgba(20, 35, 28, 0.35);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+}
+
+.sello--hero {
+    position: absolute;
+    right: -18px;
+    bottom: -18px;
+    width: 128px;
+    height: 128px;
+    transform: rotate(8deg);
+}
+
+.sello .caja--sello-texto {
+    border: none;
+    background: none;
+    padding: 0 12px;
+    color: var(--color-tinta);
+    font-size: 0.68rem;
+    line-height: 1.3;
+}
+
+/* ---- avance hacia la próxima donación masiva ---- */
+
+.progreso {
+    margin-top: clamp(48px, 7vw, 88px);
+    padding-top: clamp(32px, 5vw, 48px);
+    border-top: 1px solid var(--color-linea-clara);
+}
+
+.progreso__cabecera {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.progreso__cabecera .caja--progreso-titulo,
+.progreso__cabecera .caja--progreso-meta {
+    font-size: 0.78rem;
+    padding: 6px 10px;
+}
+
+.progreso__barra {
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(247, 241, 227, 0.12);
+    overflow: hidden;
+}
+
+.progreso__relleno {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--color-oro), var(--color-sello));
+}
+
+.progreso__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.caja--stat-numero {
+    border: none;
+    background: none;
+    padding: 0;
+    font-family: var(--fuente-display);
+    font-style: normal;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    color: var(--color-oro);
+}
+
+.caja--stat-label {
+    border: none;
+    background: none;
+    padding: 0;
+    font-size: 0.82rem;
+}
+
+/* ============================================================
+   ENCABEZADOS DE SECCIÓN (páginas interiores)
+   ============================================================ */
+
+.seccion__cabecera {
+    max-width: 62ch;
+    margin-bottom: clamp(36px, 5vw, 56px);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.caja--seccion-eyebrow {
+    align-self: flex-start;
+    font-size: 1.3rem;
+    padding: 5px 10px;
+}
+
+.caja--subtitulo {
+    font-family: var(--fuente-display);
+    font-weight: 500;
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+    line-height: 1.15;
+    padding: 14px 16px;
+}
+
+.caja--seccion-texto {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    padding: 12px 14px;
+}
+
+/* ============================================================
+   GALERÍA (páginas interiores)
+   ============================================================ */
+
+.seccion-galeria {
+    background: var(--color-papel-clara);
+    padding-top: var(--espacio-seccion);
+    padding-bottom: var(--espacio-seccion);
+}
+
+.grid-galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 28px;
+}
+
+.tarjeta-libro {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.25s ease;
+}
+
+.tarjeta-libro:hover {
+    transform: translateY(-6px);
+}
+
+.caja--galeria-imagen {
+    aspect-ratio: 2 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: rgba(20, 35, 28, 0.035);
+}
+
+.tarjeta-libro__ficha {
+    padding: 0 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.caja--galeria-titulo,
+.caja--galeria-meta {
+    border: none;
+    background: none;
+    padding: 0;
+    font-style: normal;
+}
+
+.caja--galeria-titulo {
+    font-family: var(--fuente-display);
+    font-size: 1rem;
+    color: var(--color-tinta);
+}
+
+.caja--galeria-meta {
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--color-tinta-suave);
+}
+
+/* ============================================================
+   PROMOCIONES (páginas interiores, tono levemente distinto)
+   ============================================================ */
+
+.seccion-promociones {
+    background: var(--color-papel);
+    padding-top: var(--espacio-seccion);
+    padding-bottom: var(--espacio-seccion);
+}
+
+.grid-promociones {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 32px;
+}
+
+.tarjeta-sello {
+    position: relative;
+    background: var(--color-papel-clara);
+    border: 2px dashed rgba(20, 35, 28, 0.3);
+    border-radius: var(--radio-m);
+    padding: 28px 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.grid-promociones .tarjeta-sello:nth-child(odd) {
+    transform: rotate(-1.4deg);
+}
+
+.grid-promociones .tarjeta-sello:nth-child(even) {
+    transform: rotate(1.2deg);
+}
+
+.tarjeta-sello:hover {
+    transform: rotate(0deg);
+    box-shadow: 0 18px 32px rgba(20, 35, 28, 0.12);
+}
+
+.caja--promocion-etiqueta {
+    align-self: flex-start;
+    font-size: 0.9rem;
+    padding: 4px 9px;
+    background: var(--color-sello);
+    border: none;
+    color: var(--color-papel-clara);
+    font-style: normal;
+    border-radius: 999px;
+}
+
+.caja--promocion-logo {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.caja--promocion-texto {
+    font-size: 0.88rem;
+    line-height: 1.6;
+}
+
+.caja--promocion-precio {
+    font-family: var(--fuente-display);
+    font-style: normal;
+    font-size: 1.05rem;
+    color: var(--color-sello);
+    border: none;
+    background: none;
+    padding: 0;
+    width:fit-content;
+}
+
+/* ============================================================
+   PIE DE PÁGINA (contraportada)
+   ============================================================ */
+
+.pie {
+    background: var(--color-fondo);
+    padding-top: 48px;
+    padding-bottom: 28px;
+}
+
+.pie__grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.pie .caja--logo {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+}
+
+.caja--pie-texto {
+    font-size: 0.82rem;
+    padding: 8px 12px;
+}
+
+.pie__redes {
+    display: flex;
+    gap: 10px;
+}
+
+.caja--red-social {
+    border-style: solid;
+    padding: 6px 12px;
+    font-style: normal;
+    font-size: 0.78rem;
+}
+
+.caja--red-social:hover {
+    color: var(--color-papel-clara);
+    border-color: var(--color-papel-clara);
+}
+
+.pie__legal {
+    margin-top: 32px;
+    padding-top: 18px;
+    border-top: 1px solid var(--color-linea-clara);
+}
+
+.caja--legal {
+    background-color: var(--color-fondo) !important;
+    font-size: 2rem;
+    border: none;
+    background: none;
+    padding: 0;
+    font-family: "Tangerine";
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 860px) {
+    .hero__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero__visual {
+        max-width: 300px;
+        justify-self: flex-start;
+    }
+
+    .progreso__stats {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 560px) {
+    .cabecera__interior {
+        flex-wrap: wrap;
+    }
+
+    .nav {
+        order: 3;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+}
+
+/* ============================================================
+   ACCESIBILIDAD: respeta preferencia de menor movimiento
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    * {
+        transition-duration: 0.001ms !important;
+    }
+}
