@@ -8,6 +8,7 @@
    ya que una empresa que auspicia "sella" su apoyo al libro.
    ============================================================ */
 @import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap&Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap');
+
 :root {
     --color-fondo: #14231c;
     --color-fondo-suave: #1c2f25;
@@ -116,22 +117,36 @@ p {
     gap: 24px;
     padding-top: 20px;
     padding-bottom: 20px;
+    background-color: var(--color-fondo);
 }
 
 .cabecera .caja--logo {
-    font-size: 0.75rem;
-    width:100px;
-    border:none;
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    border: none;
     padding: 0;
     margin: 0;
-    background-color: var(--color-fondo);
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: center;
 }
-.caja--logo--img{
-    width:100%;
-    border:none;
-    padding: 0;
 
+.caja--logo--img {
+    padding: 0;
+    margin: 0;
+    border: none;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    display: block;
 }
+
+
 .nav {
     display: flex;
     gap: 8px;
@@ -144,13 +159,13 @@ p {
     padding: 6px 10px;
     font-style: normal;
     font-size: 1.06em;
-    transition:color,background-color,padding, .3s ease;
+    transition: color, background-color, padding, .3s ease;
 }
 
 .caja--nav-item:hover {
     color: var(--color-papel-clara);
     background-color: var(--color-fondo-suave);
-    padding:8px 12px;
+    padding: 8px 12px;
 }
 
 .caja--nav-cta {
@@ -254,6 +269,7 @@ p {
 .caja--hero-imagen {
     aspect-ratio: 3 / 4;
     width: 100%;
+    height:500px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -262,7 +278,10 @@ p {
     box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
     background: rgba(247, 241, 227, 0.05);
 }
-
+.caja--hero-imagen img{
+    width:100%;
+    height:100%;
+}
 /* Sello de auspicio: emula una estampilla postal con borde perforado */
 .sello {
     border-radius: 50%;
@@ -270,8 +289,8 @@ p {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: var(--color-papel-clara);
-    border: 3px dashed rgba(20, 35, 28, 0.35);
+    background-color:transparent ;
+    border:none;
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
 }
 
@@ -281,15 +300,21 @@ p {
     bottom: -18px;
     width: 128px;
     height: 128px;
+    border:none;
     transform: rotate(8deg);
+}
+
+.sello--hero img{
+    width:100%;
+    height: 100%;
 }
 
 .sello .caja--sello-texto {
     border: none;
     background: none;
-    padding: 0 12px;
-    color: var(--color-tinta);
     font-size: 0.68rem;
+    padding: 0;
+    background-color: transparent;
     line-height: 1.3;
 }
 
@@ -419,11 +444,15 @@ p {
 
 .caja--galeria-imagen {
     aspect-ratio: 2 / 3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    height: fit-content;
+    box-sizing: border-box;
     background: rgba(20, 35, 28, 0.035);
+}
+
+.caja--galeria-imagen img {
+    width: 100%;
+    object-fit: contain;
+    height: 100%;
 }
 
 .tarjeta-libro__ficha {
@@ -464,12 +493,15 @@ p {
 }
 
 .grid-promociones {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 32px;
 }
 
 .tarjeta-sello {
+    flex: 1 1 320px;
+    max-width: 420px;
     position: relative;
     background: var(--color-papel-clara);
     border: 2px dashed rgba(20, 35, 28, 0.3);
@@ -506,11 +538,24 @@ p {
 }
 
 .caja--promocion-logo {
-    height: 64px;
+    border: none;
+    background: none;
+    font-style: normal;
+    padding: 0;
+    width: 100%;
+    height: 130px;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    overflow: hidden;
+}
+
+.tarjeta-sello .caja--promocion-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
 }
 
 .caja--promocion-texto {
@@ -526,7 +571,7 @@ p {
     border: none;
     background: none;
     padding: 0;
-    width:fit-content;
+    width: fit-content;
 }
 
 /* ============================================================
@@ -535,7 +580,7 @@ p {
 
 .pie {
     background: var(--color-fondo);
-    padding-top: 48px;
+    padding-top: 10px;
     padding-bottom: 28px;
 }
 
@@ -548,9 +593,20 @@ p {
 }
 
 .pie .caja--logo {
-    padding: 6px 12px;
-    font-size: 0.75rem;
+    width: 100px;
+    height: 100px;
+    border: none;
+    position: relative;
+    background-color: var(--color-fondo);
+    margin-bottom: 2%;
+}
 
+.pie .caja--logo--img {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background-color: transparent;
 }
 
 .caja--pie-texto {
